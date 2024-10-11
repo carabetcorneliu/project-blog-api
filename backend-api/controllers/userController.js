@@ -61,7 +61,7 @@ async function userByIdPost(req, res) {
 };
 
 async function userByIdPut(req, res) {
-    if (!req.params.userId) {
+    if (!req.params.userId || !req.body.username || !req.body.password) {
         return res.status(400).send('Bad request');
     }
     const userIdToEdit = parseInt(req.params.userId);
