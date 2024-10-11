@@ -1,0 +1,26 @@
+{
+  "name": "backend-api",
+  "version": "1.0.0",
+  "description": "1 of 3apps in the blog-api project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/carabetcorneliu/project-blog-api.git"
+  },
+  "author": "Carabet Corneliu",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/carabetcorneliu/project-blog-api/issues"
+  },
+  "homepage": "https://github.com/carabetcorneliu/project-blog-api#readme",
+  "dependencies": {
+    "@prisma/client": "^5.20.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.21.1",
+    "prisma": "^5.20.0"
+  }
+}
