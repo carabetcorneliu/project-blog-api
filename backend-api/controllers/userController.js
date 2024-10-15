@@ -1,9 +1,8 @@
 const prisma = require('../db/prisma');
 
-async function allUsersGet(req, res) {
+async function userListGet(req, res) {
     try {
         const allUsers = await prisma.User.findMany()
-
         if (!allUsers) {
             return res.status(404).send('no users found');
         }
@@ -16,16 +15,15 @@ async function allUsersGet(req, res) {
 };
 
 async function userByIdGet(req, res) {
-    if (!req.params.userId) {
+    if (!req.body.userId) {
         return res.status(400).send('Bad request');
     }
-    const userIdToFind = parseInt(req.params.userId);
+    const userIdToFind = parseInt(req.body.userId);
     try {
         const user = await prisma.User.findUnique({
             where: { id: userIdToFind },
             include: { posts: true },
         });
-
         if (!user) {
             return res.status(404).send('User not found');
         }
@@ -48,7 +46,6 @@ async function userByIdPost(req, res) {
                 password: req.body.password,
             }
         })
-
         if (!newUser) {
             return res.status(500).send('Server error adding user');
         }
@@ -61,16 +58,15 @@ async function userByIdPost(req, res) {
 };
 
 async function userByIdPut(req, res) {
-    if (!req.params.userId || !req.body.username || !req.body.password) {
+    if (!req.body.userId || !req.body.username || !req.body.password) {
         return res.status(400).send('Bad request');
     }
-    const userIdToEdit = parseInt(req.params.userId);
+    const userIdToEdit = parseInt(req.body.userId);
     try {
         const updateUser = await prisma.User.update({
             where: { id: userIdToEdit },
             data: { password: req.body.password },
         });
-
         if (!updateUser) {
             return res.status(404).send('Error updating user');
         }
@@ -83,15 +79,14 @@ async function userByIdPut(req, res) {
 };
 
 async function userByIdDelete(req, res) {
-    if (!req.params.userId) {
+    if (!req.body.userId) {
         return res.status(400).send('Bad request');
     }
-    const userIdToDelete = parseInt(req.params.userId);
+    const userIdToDelete = parseInt(req.body.userId);
     try {
         const deletedUser = await prisma.User.delete({
             where: { id: userIdToDelete },
         })
-
         if (!deletedUser) {
             res.status(404).send('Error deleting user');
         }
@@ -104,7 +99,7 @@ async function userByIdDelete(req, res) {
 };
 
 module.exports = { 
-    allUsersGet,
+    userListGet,
     userByIdGet,
     userByIdPost,
     userByIdPut,

@@ -1,9 +1,9 @@
-const user = require('./user');
-// const post = require('./post');
-// const message = require('./message');
+const userRouter = require('./userRouter');
+const postRouter = require('./postRouter');
+const messageRouter = require('./messageRouter');
 
 module.exports = {
-    user,
-    // post,
-    // message,
+    userRouter,
+    postRouter,
+    messageRouter,
 };
